@@ -37,7 +37,7 @@ public enum Rank {
      * @param bonusMatched 보너스 번호 일치 여부
      * @return 조건에 맞는 등수 Rank, 없으면 UNRANKED
      */
-    public static Rank from(int matchCount, boolean bonusMatched) {
+    public static Rank from(long matchCount, boolean bonusMatched) {
         return Arrays.stream(values())
                 .filter(rank -> rank.matchCount == matchCount)
                 .filter(rank -> !rank.bonusRequired || bonusMatched)
