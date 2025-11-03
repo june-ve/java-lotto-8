@@ -9,6 +9,8 @@ import java.util.List;
 
 public class InputView {
 
+    private static final int LOTTO_PRICE = 1000;
+
     public int readPurchaseAmount() {
         System.out.println("구입금액을 입력해 주세요.");
         String input = Console.readLine().trim();
@@ -16,12 +18,22 @@ public class InputView {
         validateNumber(input);
         int amount = Integer.parseInt(input);
 
+        validatePurchaseAmount(amount);
         return amount;
     }
 
     private void validateNumber(String input) {
         if (!input.matches("\\d+")) {
             throw new IllegalArgumentException("[ERROR] 숫자만 입력할 수 있습니다.");
+        }
+    }
+
+    private void validatePurchaseAmount(int amount) {
+        if (amount < LOTTO_PRICE) {
+            throw new IllegalArgumentException("[ERROR] 최소 구입 금액은 " + LOTTO_PRICE + "원입니다.");
+        }
+        if (amount % LOTTO_PRICE != 0) {
+            throw new IllegalArgumentException("[ERROR] 구입 금액은 " + LOTTO_PRICE + "원 단위여야 합니다.");
         }
     }
 
